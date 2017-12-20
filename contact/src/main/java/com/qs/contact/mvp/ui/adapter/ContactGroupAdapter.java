@@ -12,18 +12,17 @@ import java.util.List;
 
 /**
  * @author 华清松
- * @see
- * @since TODO 描述
+ * @since 联系人群组列表
  */
 public class ContactGroupAdapter extends BaseAdapter<ContactGroup> {
 
-    public ContactGroupAdapter(List<ContactGroup> dataS) {
-        super(dataS);
+    public ContactGroupAdapter(List<ContactGroup> groups) {
+        super(groups);
     }
 
     @Override
     public BaseHolder<ContactGroup> getHolder(View view, int viewType) {
-        return  new ContactGroupItemHolder(view);
+        return new ContactGroupItemHolder(view);
     }
 
     @Override

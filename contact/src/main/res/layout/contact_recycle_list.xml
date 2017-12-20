@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/contact_ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="2dp"
-        android:gravity="center"
-        android:background="@color/btn_filled_blue_bg_disabled"
-        android:text="hole" />
+        android:gravity="center_vertical"
+        android:text="hole"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 </LinearLayout>

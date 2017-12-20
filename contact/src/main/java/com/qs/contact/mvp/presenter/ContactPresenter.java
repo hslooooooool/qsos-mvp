@@ -3,6 +3,7 @@ package com.qs.contact.mvp.presenter;
 import android.app.Application;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
+import android.support.v7.widget.RecyclerView;
 
 import com.qs.arm.mvp.BasePresenter;
 import com.qs.arm.utils.RxLifecycleUtils;
@@ -28,14 +29,18 @@ public class ContactPresenter extends BasePresenter<ContactContract.Model, Conta
 
     private Application mApplication;
     private RxErrorHandler mErrorHandler;
+    private RecyclerView.Adapter mGroupAdapter;
+    private List<ContactGroup> mGroups;
     private final CompositeDisposable mDisposable = new CompositeDisposable();
 
     @Inject
     ContactPresenter(ContactContract.Model model, ContactContract.View view
-            , RxErrorHandler handler, Application application) {
+            , RxErrorHandler handler, Application application, List<ContactGroup> groups, RecyclerView.Adapter groupAdapter) {
         super(model, view);
         this.mErrorHandler = handler;
         this.mApplication = application;
+        this.mGroups = groups;
+        this.mGroupAdapter = groupAdapter;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -48,7 +53,7 @@ public class ContactPresenter extends BasePresenter<ContactContract.Model, Conta
         mDisposable.add(mModel.addContactGroup(contactGroup)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> getGroupAndContact(false)));
+                .subscribe(() -> mRootView.showMessage("ADD")));
     }
 
     @Override
@@ -69,6 +74,9 @@ public class ContactPresenter extends BasePresenter<ContactContract.Model, Conta
                     public void onNext(List<ContactGroup> contactGroups) {
                         if (contactGroups != null) {
                             mRootView.showMessage("OK" + contactGroups.size());
+                            mGroups.clear();
+                            mGroups.addAll(contactGroups);
+                            mGroupAdapter.notifyDataSetChanged();
                         }
                     }
                 });

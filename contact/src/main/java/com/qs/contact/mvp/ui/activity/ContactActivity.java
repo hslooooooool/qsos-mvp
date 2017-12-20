@@ -3,9 +3,11 @@ package com.qs.contact.mvp.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.qs.arm.base.BaseActivity;
+import com.qs.arm.base.BaseAdapter;
 import com.qs.arm.di.component.AppComponent;
 import com.qs.arm.integration.lifecycle.ActivityLifecycle;
 import com.qs.arm.utils.ArmsUtils;
@@ -14,11 +16,11 @@ import com.qs.contact.constant.ConstantRouter;
 import com.qs.contact.di.component.DaggerContactComponent;
 import com.qs.contact.di.module.ContactModule;
 import com.qs.contact.mvp.contract.ContactContract;
-import com.qs.contact.mvp.model.entity.ContactGroup;
 import com.qs.contact.mvp.presenter.ContactPresenter;
 
-import java.util.Date;
+import javax.inject.Inject;
 
+import butterknife.BindView;
 import timber.log.Timber;
 
 /**
@@ -30,6 +32,14 @@ import timber.log.Timber;
 @Route(group = ConstantRouter.group, path = ConstantRouter.main)
 public class ContactActivity extends BaseActivity<ContactPresenter>
         implements ContactContract.View, ActivityLifecycle {
+
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+
+    @Inject
+    RecyclerView.LayoutManager mLayoutManager;
+    @Inject
+    RecyclerView.Adapter mAdapter;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -47,10 +57,12 @@ public class ContactActivity extends BaseActivity<ContactPresenter>
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mPresenter.addContactGroup(new ContactGroup("1", new Date()));
+        ArmsUtils.configRecycleView(mRecyclerView, mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+//        mPresenter.addContactGroup(new ContactGroup("1", new Date()));
         mPresenter.getGroupAndContact(false);
     }
-
 
     @Override
     public Activity getActivity() {
@@ -83,4 +95,11 @@ public class ContactActivity extends BaseActivity<ContactPresenter>
     public void killMyself() {
         finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        BaseAdapter.releaseAllHolder(mRecyclerView);
+        super.onDestroy();
+    }
+
 }
