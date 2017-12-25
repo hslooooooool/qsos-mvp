@@ -27,9 +27,9 @@ import io.reactivex.subjects.Subject;
 public abstract class BaseFragment<P extends IPresenter> extends Fragment implements IFragment, FragmentLifecycleAble {
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
+
     @Inject
     protected P mPresenter;
-
 
     @NonNull
     @Override
@@ -42,13 +42,11 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
         setArguments(new Bundle());
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return initView(inflater, container, savedInstanceState);
     }
-
 
     @Override
     public void onDestroy() {
@@ -58,7 +56,6 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
         }
         this.mPresenter = null;
     }
-
 
     /**
      * 是否使用eventBus,默认为使用(true)，

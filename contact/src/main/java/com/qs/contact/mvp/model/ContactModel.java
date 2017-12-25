@@ -9,6 +9,7 @@ import com.qs.arm.mvp.BaseModel;
 import com.qs.contact.mvp.contract.ContactContract;
 import com.qs.contact.mvp.model.api.service.ContactService;
 import com.qs.contact.mvp.model.db.ContactDatabase;
+import com.qs.contact.mvp.model.entity.Contact;
 import com.qs.contact.mvp.model.entity.ContactGroup;
 
 import java.util.List;
@@ -34,6 +35,14 @@ public class ContactModel extends BaseModel implements ContactContract.Model {
     }
 
     @Override
+    public Completable addContact(Contact contact) {
+        return Completable.fromAction(() -> {
+            mRepositoryManager.obtainRoomDatabase(ContactDatabase.class, ContactDatabase.dbName).contactDao()
+                    .insert(contact);
+        });
+    }
+
+    @Override
     public Completable addContactGroup(ContactGroup contactGroup) {
         return Completable.fromAction(() -> {
             mRepositoryManager.obtainRoomDatabase(ContactDatabase.class, ContactDatabase.dbName).contactGroupDao()
@@ -50,6 +59,13 @@ public class ContactModel extends BaseModel implements ContactContract.Model {
                     .findAll()
                     .toObservable();
         }
+    }
+
+    @Override
+    public Observable<List<Contact>> getContacts() {
+        return mRepositoryManager.obtainRoomDatabase(ContactDatabase.class, ContactDatabase.dbName).contactDao()
+                .findAll()
+                .toObservable();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)

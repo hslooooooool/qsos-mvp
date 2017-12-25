@@ -30,7 +30,7 @@ public interface ContactGroupDao {
      *
      * @return List<ContactGroup>
      */
-    @Query("SELECT * FROM contact_group")
+    @Query("SELECT * FROM contact_group  ORDER BY group_name")
     Flowable<List<ContactGroup>> findAll();
 
 

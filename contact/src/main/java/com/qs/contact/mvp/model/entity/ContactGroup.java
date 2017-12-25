@@ -6,6 +6,9 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import com.qs.arm.utils.CharacterHandler;
+import com.qs.contact.mvp.ui.adapter.type.ContactType;
+
 import java.util.Date;
 
 /**
@@ -13,7 +16,7 @@ import java.util.Date;
  * @since 联系人分组
  */
 @Entity(tableName = "contact_group")
-public class ContactGroup {
+public class ContactGroup extends ContactBean {
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "gid")
@@ -52,13 +55,6 @@ public class ContactGroup {
         this.members = "0";
         this.gmtCreate = new Date(System.currentTimeMillis());
         this.gmtModified = new Date(System.currentTimeMillis());
-    }
-
-    @Ignore
-    public ContactGroup(@NonNull String name, @NonNull Date date) {
-        this.groupName = name;
-        this.gmtCreate = date;
-        this.gmtModified = date;
     }
 
     public long getGroupId() {
@@ -107,5 +103,13 @@ public class ContactGroup {
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public ContactType getType() {
+        return ContactType.Group;
+    }
+
+    public String getPinyin() {
+        return CharacterHandler.getFirstLetter(groupName);
     }
 }

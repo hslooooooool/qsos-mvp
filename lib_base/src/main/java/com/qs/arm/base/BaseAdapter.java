@@ -63,7 +63,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>>
         return dataS.size();
     }
 
-    public List<T> getInfo() {
+    public List<T> getData() {
         return dataS;
     }
 

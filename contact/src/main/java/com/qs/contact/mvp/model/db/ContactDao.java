@@ -56,7 +56,7 @@ public interface ContactDao {
      *
      * @return List<User>
      */
-    @Query("SELECT * FROM contact")
+    @Query("SELECT * FROM contact ORDER BY contact_name , phone ASC")
     Flowable<List<Contact>> findAll();
 
     /**

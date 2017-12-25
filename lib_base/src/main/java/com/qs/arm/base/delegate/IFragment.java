@@ -19,6 +19,7 @@ import org.simple.eventbus.EventBus;
  * @see BaseFragment
  */
 public interface IFragment {
+
     /**
      * 提供 AppComponent(提供所有的单例对象)给实现类,进行 Component 依赖
      *
@@ -62,4 +63,5 @@ public interface IFragment {
      * @param data data
      */
     void setData(Object data);
+
 }

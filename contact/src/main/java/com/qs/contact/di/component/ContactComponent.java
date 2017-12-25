@@ -3,7 +3,7 @@ package com.qs.contact.di.component;
 import com.qs.arm.di.component.AppComponent;
 import com.qs.arm.di.scope.ActivityScope;
 import com.qs.contact.di.module.ContactModule;
-import com.qs.contact.mvp.ui.activity.ContactActivity;
+import com.qs.contact.mvp.ui.fragment.ContactFragment;
 
 import dagger.Component;
 
@@ -16,9 +16,9 @@ import dagger.Component;
 @Component(modules = ContactModule.class, dependencies = AppComponent.class)
 public interface ContactComponent {
     /**
-     * 提供UserActivity单例对象给实现类
+     * 提供 ContactFragment 单例对象给实现类
      *
-     * @param activity activity
+     * @param fragment 用户列表界面
      */
-    void inject(ContactActivity activity);
+    void inject(ContactFragment fragment);
 }

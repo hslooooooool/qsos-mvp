@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.qs.arm.mvp.IModel;
 import com.qs.arm.mvp.IPresenter;
 import com.qs.arm.mvp.IView;
+import com.qs.contact.mvp.model.entity.Contact;
 import com.qs.contact.mvp.model.entity.ContactGroup;
 
 import java.util.List;
@@ -30,10 +31,18 @@ public interface ContactContract {
 
     interface Model extends IModel {
         /**
+         * 添加联系人
+         *
+         * @param contact 联系人
+         * @return Completable
+         */
+        Completable addContact(Contact contact);
+
+        /**
          * 添加群组列表
          *
          * @param contactGroup 联系人群组
-         * @return Observable
+         * @return Completable
          */
         Completable addContactGroup(ContactGroup contactGroup);
 
@@ -45,9 +54,23 @@ public interface ContactContract {
          */
         Observable<List<ContactGroup>> getContactGroups(boolean update);
 
+        /**
+         * 获取群组列表
+         *
+         * @return Observable
+         */
+        Observable<List<Contact>> getContacts();
+
     }
 
     interface Presenter extends IPresenter {
+        /**
+         * 添加联系人
+         *
+         * @param contact 联系人
+         */
+        void addContact(Contact contact);
+
         /**
          * 添加群组
          *
@@ -61,6 +84,11 @@ public interface ContactContract {
          * @param update 是否从缓存获取数据
          */
         void getGroupAndContact(boolean update);
+
+        /**
+         * 获取用户列表
+         */
+        void getContact();
 
     }
 

@@ -6,6 +6,9 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import com.qs.arm.utils.CharacterHandler;
+import com.qs.contact.mvp.ui.adapter.type.ContactType;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -14,7 +17,7 @@ import java.util.UUID;
  * @since 联系人实体
  */
 @Entity(tableName = "contact")
-public class Contact {
+public class Contact extends ContactBean {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "cid")
@@ -145,5 +148,13 @@ public class Contact {
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public ContactType getType() {
+        return ContactType.Contact;
+    }
+
+    public String getPinyin() {
+        return CharacterHandler.getFirstLetter(contactName);
     }
 }

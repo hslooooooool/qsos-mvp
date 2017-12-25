@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import com.qs.arm.di.scope.ActivityScope;
 import com.qs.contact.mvp.contract.ContactContract;
 import com.qs.contact.mvp.model.ContactModel;
-import com.qs.contact.mvp.model.entity.ContactGroup;
-import com.qs.contact.mvp.ui.adapter.ContactGroupAdapter;
+import com.qs.contact.mvp.model.entity.ContactBean;
+import com.qs.contact.mvp.ui.adapter.ContactAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,13 +48,13 @@ public class ContactModule {
 
     @ActivityScope
     @Provides
-    List<ContactGroup> provideContactGroups() {
+    List<ContactBean> provideContactBean() {
         return new ArrayList<>();
     }
 
     @ActivityScope
     @Provides
-    RecyclerView.Adapter provideContactGroupAdapter(List<ContactGroup> list) {
-        return new ContactGroupAdapter(list);
+    ContactAdapter provideContactAdapter(List<ContactBean> list) {
+        return new ContactAdapter(list);
     }
 }
