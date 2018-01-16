@@ -6,7 +6,7 @@
 ## Glide
 ## Lifecycle
 ## Room
-## ViewModel
+## ViewModle
 ## ARouter
 ## RxJava
 ## RxAndroid
@@ -16,4 +16,5 @@
 ## Junit
 ## Picasso
 ## Umeng
+## 组件化
 等等，设计库未列出
