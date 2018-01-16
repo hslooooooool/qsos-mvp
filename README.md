@@ -1,15 +1,15 @@
 # 此框架涉及：
----MVP
----Retrofit
----OkHttp
----Gson
----Glide
----Lifecycle
----Room
----ViewModel
----ARouter
----RxJava
----RxAndroid
+--MVP
+--Retrofit
+--OkHttp
+--Gson
+--Glide
+--Lifecycle
+--Room
+--ViewModel
+--ARouter
+--RxJava
+--RxAndroid
 ---EventBus
 ---ButterKnife
 ---Dagger
