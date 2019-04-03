@@ -1,13 +1,7 @@
 apply plugin: 'com.android.application'
 
-static def buildTime() {
-    return new Date().format("yyyyMMdd");
-}
-
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
-    useLibrary 'org.apache.http.legacy'
 
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
@@ -21,13 +15,14 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
-        // 打包时间
-        resValue "string", "build_time", buildTime()
 
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath true
-                arguments = [moduleName: project.getName()]
+                arguments = [
+                        AROUTER_MODULE_NAME: project.getName(),
+                        moduleName         : project.getName()
+                ]
             }
         }
 

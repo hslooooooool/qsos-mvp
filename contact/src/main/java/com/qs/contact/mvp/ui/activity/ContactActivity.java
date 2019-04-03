@@ -23,7 +23,7 @@ import com.qs.contact.mvp.ui.fragment.ContactFragment;
  * @see com.qs.arm.base.BaseActivity
  * @since 联系人列表页
  */
-@Route(group = ConstantRouter.group, path = ConstantRouter.main)
+@Route(group = ConstantRouter.GROUP, path = ConstantRouter.MAIN)
 public class ContactActivity extends BaseActivity<ContactPresenter>
         implements ContactContract.View, ActivityLifecycle {
 

@@ -6,8 +6,6 @@ if (isModule.toBoolean()) {
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
-    useLibrary 'org.apache.http.legacy'
     resourcePrefix "contact_"
 
     compileOptions {
@@ -29,9 +27,11 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath true
-                arguments = [moduleName           : project.getName(),
-                             //指定room.schemaLocation生成的文件路径
-                             "room.schemaLocation": "$projectDir/schemas".toString()]
+                arguments = [
+                        AROUTER_MODULE_NAME  : project.getName(),
+                        moduleName           : project.getName(),
+                        //指定room.schemaLocation生成的文件路径
+                        "room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
 
@@ -39,9 +39,9 @@ android {
     sourceSets {
         main {
             if (isModule.toBoolean()) {
-                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+                manifest.srcFile 'src/MAIN/module/AndroidManifest.xml'
             } else {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
+                manifest.srcFile 'src/MAIN/AndroidManifest.xml'
                 // 集成开发模式下排除 debug 文件夹中的所有 Java 文件
                 java {
                     exclude 'module/**'
@@ -89,10 +89,10 @@ dependencies {
 
     // test
     api rootProject.ext.dependencies["timber"]
-    testApi rootProject.ext.dependencies["junit"]
+    testImplementation rootProject.ext.dependencies["junit"]
     debugApi rootProject.ext.dependencies["canary-debug"]
     releaseApi rootProject.ext.dependencies["canary-release"]
-    testApi rootProject.ext.dependencies["canary-release"]
+    testImplementation rootProject.ext.dependencies["canary-release"]
 
     // module
     api project(':lib_base')

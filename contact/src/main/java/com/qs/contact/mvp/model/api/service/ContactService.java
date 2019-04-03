@@ -24,7 +24,7 @@ public interface ContactService {
      * @return Observable
      */
     @Headers({HEADER_API_VERSION})
-    @GET("/contact/main")
+    @GET("/contact/MAIN")
     Observable<List<ContactGroup>> getContactGroup();
 
 }

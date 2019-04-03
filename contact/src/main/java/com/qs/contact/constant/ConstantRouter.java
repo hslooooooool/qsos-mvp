@@ -11,9 +11,9 @@ public interface ConstantRouter {
     /**
      * 页面组别
      */
-    String group = "contact";
+    String GROUP = "contact";
     /**
      * 主页
      */
-    String main = group + "/main";
+    String MAIN = GROUP + "/MAIN";
 }

@@ -2,8 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
-    useLibrary 'org.apache.http.legacy'
 
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
@@ -19,7 +17,10 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath true
-                arguments = [moduleName: project.getName()]
+                arguments = [
+                        AROUTER_MODULE_NAME: project.getName(),
+                        moduleName         : project.getName()
+                ]
             }
         }
     }
@@ -149,10 +150,10 @@ dependencies {
 
     // log and test
     api rootProject.ext.dependencies["timber"]
-    testApi rootProject.ext.dependencies["junit"]
+    testImplementation rootProject.ext.dependencies["junit"]
     debugApi rootProject.ext.dependencies["canary-debug"]
     releaseApi rootProject.ext.dependencies["canary-release"]
-    testApi rootProject.ext.dependencies["canary-release"]
+    testImplementation rootProject.ext.dependencies["canary-release"]
 
     // tools
     api rootProject.ext.dependencies["progressmanager"]
